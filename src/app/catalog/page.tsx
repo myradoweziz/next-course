@@ -1,6 +1,10 @@
-import Hero from '@/components/HERO/Hero'
 import Catalog from '@/components/catalog/Catalog'
 import { ProductService } from '@/services/product.service'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Catalog'
+}
 
 async function getProducts() {
   const data = await ProductService.getAll()
@@ -8,13 +12,8 @@ async function getProducts() {
   return data
 }
 
-export default async function HomePage() {
+export default async function CatalogPage() {
   const data = await getProducts()
 
-  return (
-    <div className='bg-white pb-6 sm:pb-8 lg:pb-12'>
-      <Hero />
-      <Catalog products={data} isFull={false} />
-    </div>
-  )
+  return <Catalog isFull products={data} />
 }
